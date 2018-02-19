@@ -18,15 +18,21 @@ if __name__ == "__main__":
 	#h.load(r"e:\HomePhotoVideo")
 	#d.show_doubles()
 	
-	#s.load(r"e:\Shipkovy")
-	#s.compare(r"e:\Shipkovy", r"e:\HomePhotoVideo", 1)
+	#s.index(r"g:\shipkovy", False)
+	#s.index(r"g:\ФОТО скан. альбомы и пленки Шипковы", False)
+
+	s.index(r"e:\shipkovy", False)
+	s.load(r"e:\shipkovy")
+	s.show_doubles()
+
+	#s.compare(r"g:\Shipkovy", r"e:\shipkovy", 0)
 	#s.index(r"e:\HomePhotoVideo")
 	
-	#s.index(r"e:\HomePhotoVideo", True)
-	s.load(r"e:\HomePhotoVideo")
-	s.print_tree()
-	s.camera_stat()
-	s.print_camera_stat()
+	#s.index(r"g:\HomePhotoVideo", False)
+	#s.load(r"g:\HomePhotoVideo")
+	#s.print_tree()
+	#s.camera_stat()
+	#s.print_camera_stat()
 	
 	#s.print_camera_stat()
 	#d.show_doubles()

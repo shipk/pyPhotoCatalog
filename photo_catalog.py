@@ -56,7 +56,7 @@ class ph_image:
 		self.initExif(path)
 	def initExif(self, path):
 		f = open(path, 'rb')
-		self.exif_info = exifread.process_file(f, details = True)
+		self.exif_info = exifread.process_file(f, details = False)
 
 		# Удаляем элементы с Thumbnail
 		try:
@@ -269,7 +269,10 @@ class ph_catalog:
 				if i != "exif_info":
 					print('\t%s = %s' % (i, str(file.__dict__[i])))
 			for i in sorted(file.exif_info):
-				print('\t\t%s = %s' % (i, file.exif_info[i]))
+				try:
+					print('\t\t%s = %s' % (i, file.exif_info[i]))
+				except Exception:
+					pass
 		for cat in cat.cats:
 			self.print_tree(cat, lvl+1)
 
@@ -281,12 +284,12 @@ class ph_catalog:
 			self.cameras = {}
 			cat = self
 		for file in cat.files:
-			im = 'Model : ' + \
-				 str(file.exif_info.get('Image Make', 'Unknown')) + \
-				 ' ' + \
-				 str(file.exif_info.get('Image Model', 'Unknown')) + \
-				 '\tsn : ' + \
-				 str(file.exif_info.get('EXIF BodySerialNumber', 'Unknown'))
+			image_make  = str(file.exif_info.get('Image Make', '')) 
+			image_model = str(file.exif_info.get('Image Model', '')) 
+			body_sn = str(file.exif_info.get('EXIF BodySerialNumber', ''))
+			isn = str(file.exif_info.get('MakerNote InternalSerialNumber ', ''))
+			#s_isn = re.sub(b'\xff*$', b'', isn).decode()
+			im = 'Model : ' + image_make + ' ' + image_model + ' sn : ' + body_sn + ' ' + isn
 			self.cameras[im] = self.cameras.get(im, 0) + 1
 			#self.cameras['a'] = self.cameras.get('a', 0) + 1
 			#print("%s %s" % (im, self.cameras[im]))
